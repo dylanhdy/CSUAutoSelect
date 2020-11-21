@@ -23,9 +23,9 @@ def login():
 
     s1 = base64.b64encode(username)
     s2 = base64.b64encode(password)
-    
+
     data = {'encoded': s1 + '%%%' + s2}
-    
+
     respond = session.post(LOGIN_URL, data)
     #print(respond.text)
     respond = session.get(MAIN_URL)
