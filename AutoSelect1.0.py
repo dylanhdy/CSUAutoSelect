@@ -80,4 +80,3 @@ for i in range(0, num):
     print('第 {} 门课选课开始，课程 ID: {}'.format(i, list[i]))
     if work(list[i]):
         print('成功抢到第 %d 门课')
-
