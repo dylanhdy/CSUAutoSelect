@@ -41,9 +41,16 @@ while respond.status_code != requests.codes.ok:
 else:
     print('成功登录教务系统')
 
-respond = session.get('http://csujwc.its.csu.edu.cn/jsxsd/xsxk/xklc_list?Ves632DSdyV=NEW_XSD_WDXK')
+num = int(raw_input('需要选的课程数量为:'))
+list = []
 
-print(respond.text)
+for i in range(1, num+1):
+    id = raw_input('第 %d 门课的课程ID:' %i)
+    list.append(id)
+
+respond = session.get('http://csujwc.its.csu.edu.cn/jsxsd/xsxk/xklc_list')
+
+#print(respond.text)
 
 while True:
     key = re.findall('href="(.+)" target="blank">进入选课', respond.text)
@@ -57,14 +64,7 @@ respond = session.get('http://jwxt.sustc.edu.cn' + key[0])
 
 print('成功进入选课页面')
 #id = raw_input('课程ID:')
-#id = '202020211002751'
-
-num = int(raw_input('需要选的课程数量为:'))
-list = []
-
-for i in range(0, num):
-    id = raw_input('第 %d 门课的课程ID:' %i)
-    list.append(id)
+#id = '202020212017376' 台球
 
 def work(id):
     respond = session.get(REQUEST_URL + '?jx0404id=' + id)
