@@ -15,7 +15,6 @@ REQUEST_URL = 'http://csujwc.its.csu.edu.cn/jsxsd/xsxkkc/bxqjhxkOper'
 session = requests.Session()
 
 respond = session.get(LOGIN_URL)
-# print(respond.text)
 
 def login():
     username=raw_input('用户名:')
@@ -27,13 +26,10 @@ def login():
     data = {'encoded': s1 + '%%%' + s2}
 
     respond = session.post(LOGIN_URL, data)
-    #print(respond.text)
     respond = session.get(MAIN_URL)
     return respond
     
 respond = login()
-
-#print(respond.status_code)
 
 while respond.status_code != requests.codes.ok:
     print('用户名或密码错误，请重试')
@@ -42,36 +38,34 @@ else:
     print('成功登录教务系统')
 
 num = int(raw_input('需要选的课程数量为:'))
+
 list = []
 
 for i in range(1, num+1):
-    id = raw_input('第 %d 门课的课程ID:' %i)
-    list.append(id)
+    id = raw_input('第 %d 门课的课程 ID:' %i)
+    list.append('202020212'+id)
 
 respond = session.get('http://csujwc.its.csu.edu.cn/jsxsd/xsxk/xklc_list')
 
-#print(respond.text)
+print(respond.content)
 
 while True:
-    key = re.findall('href="(.+)" target="blank">进入选课', respond.text)
-    print(str(key))
-    if len(key) == 1:
+    key = re.findall('href="(.+?)" target="blank">进入选课', respond.content)
+    print(key)
+    if len(key) >= 1:
         break
-    time.sleep(0.1)
+    time.sleep(0.5)
 
-#respond = session.get('http://csujwc.its.csu.edu.cn/jsxsd/xsxk/xsxk_index?jx0502zbid=45803CD452A342E6997F6B19E62CB96C')
-respond = session.get('http://jwxt.sustc.edu.cn' + key[0])
+respond = session.get('http://csujwc.its.csu.edu.cn' + key[0])
 
 print('成功进入选课页面')
-#id = raw_input('课程ID:')
-#id = '202020212017376' 台球
 
 def work(id):
     respond = session.get(REQUEST_URL + '?jx0404id=' + id)
-    #respond = session.get('http://csujwc.its.csu.edu.cn/jsxsd/xsxkkc/bxqjhxkOper?jx0404id=202020211002751')
-    #print(respond.text)
+    print(respond.text)
     while not re.search('true', respond.text):
         respond = session.get(REQUEST_URL + '?jx0404id=' + id)
+        print(respond.text)
         time.sleep(0.1)
         print('正在尝试')
     return True
