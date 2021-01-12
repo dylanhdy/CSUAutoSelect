@@ -79,4 +79,4 @@ for i in range(0, num):
     else:
         print("成功抢到第 %d 门课")
 
-raw_input('输入回车结束程序')
+raw_input('输入回车以结束程序')
