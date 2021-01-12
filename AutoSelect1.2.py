@@ -71,7 +71,7 @@ def work(id):
     if re.search('null', respond.text):
         print("没有该 ID 所对应的课程")
     else:
-        print(re.search('"选课失败：(.+)"', respond.content).group(1))
+        print(re.search('"选课失败：(.+)"', respond.text).group(1))
     return False
 
 for i in range(0, num):
