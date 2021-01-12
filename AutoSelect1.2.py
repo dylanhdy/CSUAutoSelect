@@ -17,19 +17,21 @@ session = requests.Session()
 respond = session.get(LOGIN_URL)
 
 def login():
-    username=raw_input("用户名:")
-    password=raw_input("密码:")
+    username=input("用户名:")
+    password=input("密码:")
 
-    s1 = base64.b64encode(username)
-    s2 = base64.b64encode(password)
+    s1 = base64.b64encode(username.encode())
+    s2 = base64.b64encode(password.encode())
 
-    data = {'encoded': s1 + '%%%' + s2}
+    data = {'encoded': s1.decode() + '%%%' + s2.decode()}
 
     respond = session.post(LOGIN_URL, data)
     respond = session.get(MAIN_URL)
     return respond
     
 respond = login()
+
+#print(respond.text)
 
 while respond.status_code != requests.codes.ok:
     print('用户名或密码错误，请重试')
@@ -42,7 +44,7 @@ num = int(input('需要选的课程数量为:'))
 list = []
 
 for i in range(1, num+1):
-    id = raw_input('第 %d 门课的课程 ID:' %i)
+    id = input('第 %d 门课的课程 ID:' %i)
     list.append('202020212'+id)
 
 respond = session.get('http://csujwc.its.csu.edu.cn/jsxsd/xsxk/xklc_list')
@@ -50,7 +52,7 @@ respond = session.get('http://csujwc.its.csu.edu.cn/jsxsd/xsxk/xklc_list')
 #print(respond.content)
 
 while True:
-    key = re.findall('href="(.+?)" target="blank">进入选课', respond.content)
+    key = re.findall('href="(.+?)" target="blank">进入选课', respond.text)
     #print(key)
     if len(key) >= 1:
         break
@@ -64,12 +66,12 @@ def work(id):
     respond = session.get(REQUEST_URL + '?jx0404id=' + id)
     print('正在尝试')
     #print(respond.content)
-    if re.search('true', respond.content):
+    if re.search('true', respond.text):
         return True
-    if re.search('null', respond.content):
+    if re.search('null', respond.text):
         print("没有该 ID 所对应的课程")
     else:
-        print re.search('"选课失败：(.+)"', respond.content).group(1)
+        print(re.search('"选课失败：(.+)"', respond.content).group(1))
     return False
 
 for i in range(0, num):
@@ -79,4 +81,4 @@ for i in range(0, num):
     else:
         print("成功抢到第 %d 门课")
 
-raw_input('输入回车以结束程序')
+input('输入回车以结束程序')
