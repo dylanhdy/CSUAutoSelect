@@ -17,8 +17,8 @@ session = requests.Session()
 respond = session.get(LOGIN_URL)
 
 def login():
-    username=input("用户名:")
-    password=input("密码:")
+    username=input("学号:")
+    password=input("密码（中南大学教务系统）:")
 
     s1 = base64.b64encode(username.encode())
     s2 = base64.b64encode(password.encode())
@@ -34,7 +34,7 @@ respond = login()
 #print(respond.text)
 
 while respond.status_code != requests.codes.ok:
-    print('用户名或密码错误，请重试')
+    print('学号或密码错误，请重试')
     respond = login()
 else:
     print('成功登录教务系统')
