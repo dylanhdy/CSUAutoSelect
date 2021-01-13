@@ -31,5 +31,7 @@ $ python3 AutoSelect1.2.py
 
 按照提示输入学号，教务系统密码，课程 ID 后即可开始自动选课
 
+课程 ID 查找方法：在 [中南大学教务系统课表查询页面](http://csujwc.its.csu.edu.cn/jiaowu/pkgl/llsykb/llsykb_frm.jsp?isview=1) 中点击「按教师」按钮，输入学年学期、教师名称后点击「查询」。格子中央的 6 位数字编号即为课程 ID。
+
 ## 许可协议
 CSUAutoSelect [GPL-3.0 License](https://github.com/CrazyDaveHDY/CSUAutoSelect/blob/master/LICENSE)
