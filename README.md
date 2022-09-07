@@ -6,7 +6,7 @@
 
 ## 安装
 ### Python3
-该项目至少需要 Python3，可以从 [Python 官网](https://www.python.org/) 下载并安装
+该项目需要 Python3，可以从 [Python 官网](https://www.python.org/) 下载并安装
 
 ### Repo
 点击右上角的 `Clone or download` 下载该项目至本地
