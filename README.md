@@ -1,6 +1,6 @@
 # CSUAutoselect
 
-中南大学自动选课工具V1.2
+中南大学自动选课工具 V1.3
 
 作者：[@DavidHuang](https://github.com/CrazyDaveHDY)
 
