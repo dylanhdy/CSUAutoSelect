@@ -1,6 +1,5 @@
 # coding=utf-8
 
-import random
 import re
 import time
 import requests
@@ -31,7 +30,7 @@ def login():
     
 respond = login()
 
-#print(respond.text)
+print(respond.text)
 
 while respond.status_code != requests.codes.ok:
     print('学号或密码错误，请重试')
