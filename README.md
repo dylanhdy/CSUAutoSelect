@@ -26,7 +26,7 @@ $ pip3 install requests
 
 进入项目根目录，命令行中运行
 ```console
-$ python3 AutoSelect1.2.py
+$ python3 autoselect.py
 ```
 
 按照提示输入学号，教务系统密码，课程 ID 后即可开始自动选课
